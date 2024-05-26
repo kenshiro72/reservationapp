@@ -1,0 +1,36 @@
+<h3>施設登録</h3>
+
+    <%= form_with model: @room do |f| %>
+      <table>
+        <tr>
+          <th><%= f.label :facilityname ,"施設名" %></th>
+          <td><%= f.text_field :facilityname %></td>
+        </tr>
+
+        <tr>
+          <th><%= f.label :facilitypic,"施設画像" %></th>
+          <td><%= f.file_field :facilitypic, class: "image" %></td>
+        </tr>
+
+        <tr>
+          <th><%= f.label :facilityintroduction ,"紹介文" %></th>
+          <td><%= f.text_field :facilityintroduction %></td>
+        </tr>
+
+        <tr>
+          <th><%= f.label :cost ,"料金" %></th>
+          <td><%= f.text_area :cost %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :address ,"住所" %></th>
+          <td><%= f.text_area :address %></td>
+        </tr>
+      </table>
+
+      <div>
+        <ul>
+          <li><%= f.submit "登録完了する"%></li>
+          <li><%= link_to "施設一覧に戻る", rooms_path %></li>
+        </ul>
+      </div>
+    <% end %>
