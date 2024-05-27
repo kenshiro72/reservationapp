@@ -26,4 +26,11 @@ class RoomsController < ApplicationController
 
   def destroy
   end
+
+  def search
+    @rooms = Room.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "result"
+  end
+
 end

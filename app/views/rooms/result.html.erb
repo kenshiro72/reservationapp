@@ -1,0 +1,23 @@
+<h3>検索結果</h3>
+<p>条件に合う施設が<%= Room.count %>件見つかりました。</p>
+  <table>
+    <thead>
+      <tr>
+        <th>施設名</th>
+        <th>住所</th>
+        <th>紹介文</th>
+        <th>料金</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td><%= room.facilityname %></td>
+          <td><%= room.address%></td>
+          <td><%= room.facilityintroduction %></td>
+          <td><%= room.cost %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
