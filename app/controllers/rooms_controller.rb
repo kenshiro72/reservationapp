@@ -16,6 +16,7 @@ class RoomsController < ApplicationController
   end
 
   def show
+    @room = Room.find(params[:id])
   end
 
   def edit
@@ -28,9 +29,14 @@ class RoomsController < ApplicationController
   end
 
   def search
-    @rooms = Room.search(params[:keyword])
-    @keyword = params[:keyword]
+    puts @subject
+    if params[:subject] == "free"
+      @rooms = Room.search(params[:keyword])
+      @keyword = params[:keyword]
+    elsif params[:subject] == "area"
+      @rooms = Room.search_by_area(params[:keyword])
+      @keyword = params[:keyword]
+    end
     render "result"
   end
-
 end

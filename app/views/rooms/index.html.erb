@@ -2,10 +2,17 @@
 <div class="search-form">
   <%= form_with url: search_path, method: :get, local: true do |f| %>
     <%= f.text_field :keyword, value: @keyword %>
+    <%= f.hidden_field :subject, value: "free"  %>
     <%= f.submit "検索" %>
   <% end %>
 </div>
-
+<div class="search-form">
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, value: @keyword %>
+    <%= f.hidden_field :subject, value: "area"  %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
 
   <table>
     <thead>
@@ -26,6 +33,9 @@
           <td><%= room.facilityintroduction %></td>
           <td><%= room.cost %></td>
           <td><%= room.created_at.to_s(:date_jp) %></td>
+          <td>
+              <%= link_to "詳細", room %>
+          </td>
         </tr>
       <% end %>
     </tbody>

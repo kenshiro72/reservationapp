@@ -1,0 +1,23 @@
+<h3>施設詳細</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>施設名</th>
+        <th>施設画像</th>
+        <th>紹介文</th>
+        <th>料金</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= @room.facilityname %></td>
+        <td><%= image_tag @room.facilitypic.url , class:"fpic", alt: "施設画像" %></td>
+        <td><%= @room.facilityintroduction %></td>
+        <td><%= @room.cost %></td>
+      </tr>
+    </tbody>
+  </table>
+
+<%= link_to "施設一覧に戻る", :back %>
