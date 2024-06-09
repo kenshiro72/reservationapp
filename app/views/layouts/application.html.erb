@@ -11,6 +11,30 @@
   </head>
 
   <body>
-    <%= yield %>
+      <div class="mypage-btn-container" id="mypageBtnContainer">
+        <button class="btn-drop" >
+          <% if current_user.present? == true && current_user.profilepic.present? == true %>
+            <%= image_tag current_user.profilepic.url , class:"toppic", alt: "アイコン画像" %>
+          <% elsif current_user.present? == true && current_user.profilepic.present? == false %>
+            <%= image_tag "prof_default.png", class:"toppic" %>
+          <% end %>
+          <% if current_user.present? %>
+            <p class = "header_name"><%= current_user.name %></p>
+          <% else %>
+            ゲスト
+          <% end %>
+        </button>
+        <div class="mypage-dropdown" id="mypageDropdown">
+	        <ul>
+	          <li><%= link_to '施設登録', new_room_path %></li>
+	          <li><%= link_to '予約済み一覧', reservations_path %></li>
+            <li><%= link_to '登録済み一覧', rooms_index_path %></li>
+            <li><%= link_to 'アカウント設定', edit_user_registration_path %></li>
+	          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+	        </ul>
+        </div>
+      </div>
+  </li>
+  <%= yield %>
   </body>
 </html>

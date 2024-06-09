@@ -1,0 +1,38 @@
+<h3>予約確認</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>チェックイン日</th>
+        <th>チェックアウト日</th>
+        <th>宿泊日数</th>
+        <th>人数</th>
+        <th>支払い金額</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= @reservation.check_in_date %></td>
+        <td><%= @reservation.check_out_date %></td>
+        <td><%= @stay_date %></td>
+        <td><%= @reservation.people_number %></td>
+        <td><%= @reservation.total_price %></td>
+      </tr>
+    </tbody>
+  </table>
+<p>上記の内容が正しければ「予約を確定する」を押してください。</p>
+    <%= form_with model: @reservation , url:  reservations_path, method: :post do |f| %>
+      <%= f.hidden_field :user_id, value: @reservation.user_id %>
+      <%= f.hidden_field :room_id, value: @reservation.room_id %>
+      <%= f.hidden_field :check_in_date, value: @reservation.check_in_date %>
+      <%= f.hidden_field :check_out_date, value: @reservation.check_out_date %>
+      <%= f.hidden_field :total_price, value: @reservation.total_price %>
+      <%= f.hidden_field :people_number, value: @reservation.people_number %>
+      <div>
+        <ul>
+          <li><%= f.submit "予約を確定する"%></li>
+          <li><%= link_to "キャンセル", :back %></li>
+        </ul>
+      </div>
+    <% end %>

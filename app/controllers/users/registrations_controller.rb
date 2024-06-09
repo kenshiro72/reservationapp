@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+# このコントローラでは、ユーザー作成と編集が行えるようにする。
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -8,6 +8,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def new
   #   super
   # end
+
+  def create
+    @user = User.new(params.require(:user).permit(:name, :email, :password, :password_confirmation))
+    @user.save
+    redirect_to "/"
+  end
+  def profile_edit
+    @user = current_user
+  end
+  def profile_update
+    @user = current_user
+    if @user.update(params.require(:user).permit(:name, :introduction, :profilepic))
+      redirect_to  users_profile_path
+    else
+      render "users/profile_edit"
+    end
+  end
 
   # POST /resource
   # def create

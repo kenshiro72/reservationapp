@@ -20,4 +20,26 @@
     </tbody>
   </table>
 
-<%= link_to "施設一覧に戻る", :back %>
+  <%= form_with model: @reservation, url:  reservations_confirm_path, method: :post do |f| %>
+    <table>
+      <tr>
+        <th><%= f.label :check_in_date ,"チェックイン日" %></th>
+        <td><%= f.date_field :check_in_date %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :check_out_date ,"チェックアウト日" %></th>
+        <td><%= f.date_field :check_out_date %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :people_number ,"人数" %></th>
+        <td><%= f.text_field :people_number %></td>
+      </tr>
+
+    </table>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= f.hidden_field :user_id, value: @user.id %>
+    <%= f.submit "予約する"%>
+  <% end %>
+<%= link_to "戻る", :back %>

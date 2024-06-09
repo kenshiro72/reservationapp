@@ -1,13 +1,15 @@
 class RoomsController < ApplicationController
   def index
-    @rooms = Room.all
+    @rooms = current_user.rooms
   end
+
   def new
-    @room  = Room.new
+    @room = Room.new
+    @user = current_user
   end
 
   def create
-    @room = Room.new(params.require(:room).permit(:facilityname, :facilitypic, :facilityintroduction, :cost, :address))
+    @room = Room.new(params.require(:room).permit(:facilityname, :facilitypic, :facilityintroduction, :cost, :address, :user_id))
     if @room.save
       redirect_to rooms_path
     else
@@ -17,6 +19,8 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
+    @user = current_user
+    @reservation = Reservation.new
   end
 
   def edit
@@ -26,6 +30,9 @@ class RoomsController < ApplicationController
   end
 
   def destroy
+    @room = Room.find(params[:id])
+    @room.destroy
+    redirect_to rooms_index
   end
 
   def search
@@ -36,6 +43,9 @@ class RoomsController < ApplicationController
     elsif params[:subject] == "area"
       @rooms = Room.search_by_area(params[:keyword])
       @keyword = params[:keyword]
+    end
+    if @rooms.count == 0
+      @rooms = Room.all
     end
     render "result"
   end

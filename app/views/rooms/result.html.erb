@@ -1,3 +1,17 @@
+<div class="search-form">
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword,:placeholder => "キーワードを入力", value: @keyword %>
+    <%= f.hidden_field :subject, value: "free"  %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
+<div class="search-form">
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, :placeholder => "エリア名を入力",value: @keyword %>
+    <%= f.hidden_field :subject, value: "area"  %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
 <h3>検索結果</h3>
 <p>条件に合う施設が<%= @rooms.count %>件見つかりました。</p>
   <table>
@@ -17,6 +31,12 @@
           <td><%= room.address%></td>
           <td><%= room.facilityintroduction %></td>
           <td><%= room.cost %></td>
+          <td>
+            <%= link_to "詳細", room %>
+          </td>
+          <td>
+            <%= link_to "削除",  room, method: :delete %>
+          </td>
         </tr>
       <% end %>
     </tbody>

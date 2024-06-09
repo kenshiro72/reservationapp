@@ -1,18 +1,17 @@
-<h3>施設一覧</h3>
 <div class="search-form">
   <%= form_with url: search_path, method: :get, local: true do |f| %>
-    <%= f.text_field :keyword, value: @keyword %>
+    <%= f.text_field :keyword,:placeholder => "キーワードを入力", value: @keyword %>
     <%= f.hidden_field :subject, value: "free"  %>
     <%= f.submit "検索" %>
   <% end %>
 </div>
 <div class="search-form">
   <%= form_with url: search_path, method: :get, local: true do |f| %>
-    <%= f.text_field :keyword, value: @keyword %>
+    <%= f.text_field :keyword, :placeholder => "エリア名を入力",value: @keyword %>
     <%= f.hidden_field :subject, value: "area"  %>
     <%= f.submit "検索" %>
   <% end %>
-</div>
+<h3>登録施設一覧</h3>
 
   <table>
     <thead>
@@ -36,9 +35,17 @@
           <td>
               <%= link_to "詳細", room %>
           </td>
+          <td>
+            <%= link_to "削除",  room, method: :delete %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 
 <p><%= link_to "施設登録", new_room_path %></p>
+<p><%= link_to "新規登録", new_user_registration_path %></p>
+<p><%= link_to "アカウント情報変更", edit_user_registration_path%></p>
+<p><%= link_to "プロフィール", users_profile_path %></p>
+<p><%= link_to "ログイン", new_user_session_path %></p>
+<p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
