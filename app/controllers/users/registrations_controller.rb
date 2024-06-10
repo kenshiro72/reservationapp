@@ -5,22 +5,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   def create
     @user = User.new(params.require(:user).permit(:name, :email, :password, :password_confirmation))
     @user.save
-    redirect_to "/"
+    redirect_to root_path
   end
+
+  def profile_show
+    @user = current_user
+  end
+
   def profile_edit
     @user = current_user
   end
+
   def profile_update
     @user = current_user
     if @user.update(params.require(:user).permit(:name, :introduction, :profilepic))
-      redirect_to  users_profile_path
+      redirect_to users_profile_path
     else
       render "users/profile_edit"
     end

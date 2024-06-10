@@ -11,30 +11,46 @@
   </head>
 
   <body>
+    <% if current_user.present? == true && current_user.profilepic.present? == true %>
       <div class="mypage-btn-container" id="mypageBtnContainer">
         <button class="btn-drop" >
-          <% if current_user.present? == true && current_user.profilepic.present? == true %>
-            <%= image_tag current_user.profilepic.url , class:"toppic", alt: "アイコン画像" %>
-          <% elsif current_user.present? == true && current_user.profilepic.present? == false %>
-            <%= image_tag "prof_default.png", class:"toppic" %>
-          <% end %>
-          <% if current_user.present? %>
-            <p class = "header_name"><%= current_user.name %></p>
-          <% else %>
-            ゲスト
-          <% end %>
+          <%= image_tag current_user.profilepic.url , class:"toppic", alt: "アイコン画像" %>
+          <p class = "header_name"><%= current_user.name %></p>
         </button>
         <div class="mypage-dropdown" id="mypageDropdown">
 	        <ul>
 	          <li><%= link_to '施設登録', new_room_path %></li>
 	          <li><%= link_to '予約済み一覧', reservations_path %></li>
             <li><%= link_to '登録済み一覧', rooms_index_path %></li>
-            <li><%= link_to 'アカウント設定', edit_user_registration_path %></li>
+            <li><%= link_to 'アカウント設定', profile_show_path %></li>
+            <li><%= link_to 'プロフィール', users_profile_path %></li>
 	          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
 	        </ul>
         </div>
       </div>
-  </li>
-  <%= yield %>
+    <% elsif current_user.present? == true && current_user.profilepic.present? == false %>
+      <div class="mypage-btn-container" id="mypageBtnContainer">
+        <button class="btn-drop" >
+          <%= image_tag "prof_default.png", class:"toppic" %>
+          <p class = "header_name"><%= current_user.name %></p>
+        </button>
+        <div class="mypage-dropdown" id="mypageDropdown">
+	        <ul>
+	          <li><%= link_to '施設登録', new_room_path %></li>
+	          <li><%= link_to '予約済み一覧', reservations_path %></li>
+            <li><%= link_to '登録済み一覧', rooms_index_path %></li>
+            <li><%= link_to 'アカウント設定', profile_show_path %></li>
+            <li><%= link_to 'プロフィール', users_profile_path %></li>
+	          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+	        </ul>
+        </div>
+      </div>
+    <% elsif current_user.present? == false %>
+      <p><%= link_to "新規登録", new_user_registration_path %></p>
+      <p><%= link_to "ログイン", new_user_session_path %></p>
+    <% end %>
+
+    <%= yield %>
+    <p><%= link_to "TOPページ", root_path %></p>
   </body>
 </html>
