@@ -8,16 +8,24 @@ class ReservationsController < ApplicationController
   def confirm
     @reservation = Reservation.new(params.require(:reservation).permit(:check_in_date, :check_out_date, :user_id, :room_id, :reservation_id, :people_number ))
     @reservation.user = current_user
+    @user = current_user
     @room = @reservation.room
-    @stay_date = (@reservation.check_out_date - @reservation.check_in_date).to_i
-    @reservation.total_price = @room.cost * @reservation.people_number * @stay_date
+    if @reservation.valid?
+      @stay_date = (@reservation.check_out_date - @reservation.check_in_date).to_i
+      @reservation.total_price = @room.cost * @reservation.people_number * @stay_date
+    else
+      render 'rooms/show'
+    end
   end
 
   def create
     @reservation = Reservation.new(params.require(:reservation).permit(:check_in_date, :check_out_date, :user_id, :room_id, :people_number, :total_price ))
     @room = @reservation.room
-    @reservation.save
-    redirect_to reservations_path
+    if @reservation.save
+      redirect_to reservations_path
+    else
+      render 'rooms/show'
+    end
   end
 
   def show

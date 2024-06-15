@@ -18,10 +18,10 @@
           <td><%= image_tag reservation.room.facilitypic.url , class:"fpic", alt: "施設画像" %></td>
           <td><%= reservation.room.facilityname %></td>
           <td><%= reservation.room.facilityintroduction %></td>
-          <td><%= reservation.total_price %></td>
-          <td><%= reservation.check_in_date %></td>
-          <td><%= reservation.check_out_date %></td>
-          <td><%= reservation.created_at.to_s(:date_jp) %></td>
+          <td><%= "¥#{reservation.total_price}" %></td>
+          <td><%= reservation.check_in_date.to_s(:date_jp) %></td>
+          <td><%= reservation.check_out_date.to_s(:date_jp) %></td>
+          <td><%= reservation.created_at.to_s(:datetime_jp) %></td>
           <td>
             <%= link_to "削除",  reservation, method: :delete %>
           </td>
