@@ -14,7 +14,7 @@
 </div>
 <h3>検索結果</h3>
 <p>条件に合う施設が<%= @rooms.count %>件見つかりました。</p>
-  <table>
+  <table class="index-table">
     <thead>
       <tr>
         <th>施設名</th>
@@ -32,7 +32,9 @@
           <td><%= room.facilityintroduction %></td>
           <td><%= room.cost %></td>
           <td>
-            <%= link_to "詳細", room %>
+            <% if user_signed_in? %>
+              <%= link_to "詳細", room %>
+            <% end %>
           </td>
         </tr>
       <% end %>

@@ -1,5 +1,5 @@
 <h3>予約済み一覧</h3>
-  <table>
+  <table class="index-table">
     <thead>
       <tr>
         <th>施設画像</th>
@@ -19,11 +19,11 @@
           <td><%= reservation.room.facilityname %></td>
           <td><%= reservation.room.facilityintroduction %></td>
           <td><%= "¥#{reservation.total_price}" %></td>
-          <td><%= reservation.check_in_date.to_s(:date_jp) %></td>
-          <td><%= reservation.check_out_date.to_s(:date_jp) %></td>
-          <td><%= reservation.created_at.to_s(:datetime_jp) %></td>
+          <td><%= l reservation.check_in_date %></td>
+          <td><%= l reservation.check_out_date %></td>
+          <td><%= l reservation.created_at %></td>
           <td>
-            <%= link_to "削除",  reservation, method: :delete %>
+            <%= link_to "キャンセル",  reservation, method: :delete %>
           </td>
         </tr>
       <% end %>
