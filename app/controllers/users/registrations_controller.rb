@@ -5,9 +5,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   def create
     @user = User.new(params.require(:user).permit(:name, :email, :password, :password_confirmation))
