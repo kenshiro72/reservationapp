@@ -11,8 +11,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     @user = User.new(params.require(:user).permit(:name, :email, :password, :password_confirmation))
-    @user.save
-    redirect_to root_path
+    if @user.valid?(:account_registration)
+      @user.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def profile_show
