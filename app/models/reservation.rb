@@ -10,8 +10,8 @@ class Reservation < ApplicationRecord
 
 
   def check_out_date_cannot_be_before_check_in_date
-    if !check_out_date.nil? && !check_in_date.nil? && check_out_date < check_in_date
-      errors.add(:check_out_date, 'はチェックイン日以降の日付で選択してください。')
+    if !check_out_date.nil? && !check_in_date.nil? && check_out_date <= check_in_date
+      errors.add(:check_out_date, 'はチェックイン日より後の日付で選択してください。')
     end
   end
 
