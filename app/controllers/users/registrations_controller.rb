@@ -13,6 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new(params.require(:user).permit(:name, :email, :password, :password_confirmation))
     if @user.valid?(:account_registration)
       @user.save
+      sign_in @user
       redirect_to root_path
     else
       render :new

@@ -11,11 +11,17 @@
   </head>
 
   <body>
+  <div class = "header-container" >
+      <div class = "header-logo-container">
+      <%= link_to image_tag("header_logo.png", class: "header-logo"),  root_path %>
+      </div>
     <% if current_user.present? == true && current_user.profilepic.present? == true %>
       <div class="mypage-btn-container" id="mypageBtnContainer">
         <button class="btn-drop" >
-          <%= image_tag current_user.profilepic.url , class:"toppic", alt: "アイコン画像" %>
-          <p class = "header_name"><%= current_user.name %></p>
+          <div>
+            <%= image_tag current_user.profilepic.url , class:"toppic", alt: "アイコン画像" %>
+          </div>
+          <div class = "header_name"><%= current_user.name %></div>
         </button>
         <div class="mypage-dropdown" id="mypageDropdown">
 	        <ul>
@@ -46,11 +52,16 @@
         </div>
       </div>
     <% elsif current_user.present? == false %>
-      <p><%= link_to "新規登録", new_user_registration_path %></p>
-      <p><%= link_to "ログイン", new_user_session_path %></p>
+      <div>
+        <%= button_to '新規登録', {controller: 'users/registrations', action: 'new'}, {method: :get }%>
+        <%= button_to 'ログイン', {controller: 'users/sessions', action: 'new'}, {method: :get }%>
+      </div>
     <% end %>
+  </div>
 
     <%= yield %>
-    <p><%= link_to "TOPページ", root_path %></p>
+    <div class = "header-logo-container">
+      <%= link_to image_tag("header_logo.png", class: "header-logo"),  root_path %>
+    </div>
   </body>
 </html>
