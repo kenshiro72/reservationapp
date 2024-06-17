@@ -1,0 +1,45 @@
+<h3>施設詳細</h3>
+<%= render "shared/error", obj: @reservation %>
+  <table class="index-table">
+    <thead>
+      <tr>
+        <th>施設名</th>
+        <th>施設画像</th>
+        <th>紹介文</th>
+        <th>料金</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td><%= @room.facilityname %></td>
+        <td><%= image_tag @room.facilitypic.url , class:"fpic", alt: "施設画像" %></td>
+        <td><%= @room.facilityintroduction %></td>
+        <td><%= @room.cost %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= form_with model: @reservation, url:  reservations_confirm_path, method: :post do |f| %>
+    <table>
+      <tr>
+        <th><%= f.label :check_in_date ,"チェックイン日" %></th>
+        <td><%= f.date_field :check_in_date %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :check_out_date ,"チェックアウト日" %></th>
+        <td><%= f.date_field :check_out_date %></td>
+      </tr>
+
+      <tr>
+        <th><%= f.label :people_number ,"人数" %></th>
+        <td><%= f.text_field :people_number %></td>
+      </tr>
+
+    </table>
+    <%= f.hidden_field :room_id, value: @room.id %>
+    <%= f.hidden_field :user_id, value: @user.id %>
+    <%= f.submit "予約する"%>
+  <% end %>
+<%= link_to "戻る", :back %>

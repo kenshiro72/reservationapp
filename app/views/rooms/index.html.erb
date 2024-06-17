@@ -1,0 +1,44 @@
+<div class="search-form">
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword,:placeholder => "キーワードを入力", value: @keyword %>
+    <%= f.hidden_field :subject, value: "free"  %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
+<div class="search-form">
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, :placeholder => "エリア名を入力",value: @keyword %>
+    <%= f.hidden_field :subject, value: "area"  %>
+    <%= f.submit "検索" %>
+  <% end %>
+<h3>登録施設一覧</h3>
+
+  <table class="index-table">
+    <thead>
+      <tr>
+        <th>施設名</th>
+        <th>施設画像</th>
+        <th>紹介文</th>
+        <th>料金</th>
+        <th>作成日</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td><%= room.facilityname %></td>
+          <td><%= image_tag room.facilitypic.url , class:"fpic", alt: "施設画像" %></td>
+          <td><%= room.facilityintroduction %></td>
+          <td><%= room.cost %></td>
+          <td><%= l room.created_at %></td>
+          <td>
+              <%= link_to "詳細", room %>
+          </td>
+          <td>
+            <%= link_to "削除",  room, method: :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

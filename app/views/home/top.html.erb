@@ -1,0 +1,40 @@
+<h3>エリア検索</h3>
+<div class="search-form">
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword, :placeholder => "エリア名を入力",value: @keyword %>
+    <%= f.hidden_field :subject, value: "area"  %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
+<div class="ra-container">
+  <h3>おすすめのエリア</h3>
+  <div class="ra-box">
+    <div class="recommendation-area">
+      <%= form_with url: search_path, method: :get, local: true do |f| %>
+        <%= f.hidden_field :subject, value: "Tokyo"  %>
+        <%= f.submit "東京" %>
+      <% end %>
+    </div>
+
+    <div class="recommendation-area">
+      <%= form_with url: search_path, method: :get, local: true do |f| %>
+        <%= f.hidden_field :subject, value: "Osaka"  %>
+        <%= f.submit "大阪" %>
+      <% end %>
+    </div>
+
+    <div class="recommendation-area">
+      <%= form_with url: search_path, method: :get, local: true do |f| %>
+        <%= f.hidden_field :subject, value: "Kyoto"  %>
+        <%= f.submit "京都" %>
+      <% end %>
+    </div>
+
+    <div class="recommendation-area">
+      <%= form_with url: search_path, method: :get, local: true do |f| %>
+        <%= f.hidden_field :subject, value: "Sapporo"  %>
+        <%= f.submit "札幌" %>
+      <% end %>
+    </div>
+  </div>
+</div>

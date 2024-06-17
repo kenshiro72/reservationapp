@@ -1,0 +1,20 @@
+<h3>予約確認</h3>
+
+        <p><%= "チェックイン日：#{l @reservation.check_in_date}" %></p>
+        <p><%= "チェックアウト日：#{l @reservation.check_out_date}" %></p>
+        <p><%= "宿泊日数：#{@stay_date}日" %></p>
+        <p><%= "宿泊人数：#{@reservation.people_number}人" %></p>
+        <p><%= "合計金額：¥#{@reservation.total_price}" %></p>
+
+<p>上記の内容が正しければ「予約を確定する」を押してください。</p>
+<%= form_with model: @reservation , url:  reservations_path, method: :post do |f| %>
+  <%= f.hidden_field :user_id, value: @reservation.user_id %>
+  <%= f.hidden_field :room_id, value: @reservation.room_id %>
+  <%= f.hidden_field :check_in_date, value: @reservation.check_in_date %>
+  <%= f.hidden_field :check_out_date, value: @reservation.check_out_date %>
+  <%= f.hidden_field :total_price, value: @reservation.total_price %>
+  <%= f.hidden_field :people_number, value: @reservation.people_number %>
+  <div>
+    <%= f.submit "予約を確定する"%>
+  </div>
+<% end %>
